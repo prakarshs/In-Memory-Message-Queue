@@ -1,4 +1,4 @@
-package org.prakarshs;
+package org.prakarshs.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
