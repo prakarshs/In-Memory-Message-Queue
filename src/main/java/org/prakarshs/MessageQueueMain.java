@@ -1,19 +1,30 @@
 package org.prakarshs;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.prakarshs.Implementations.MessageQueueIMPL;
+import org.prakarshs.Interfaces.MessageQueueInterface;
+import org.prakarshs.Runners.MessageConsumer;
+import org.prakarshs.Runners.MessageProducer;
+
+import java.util.LinkedList;
+
 public class MessageQueueMain {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        MessageQueueInterface messageQueueInterface = new MessageQueueIMPL(new LinkedList<>(), 5L);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        MessageProducer messageProducer = new MessageProducer(messageQueueInterface);
+        MessageConsumer messageConsumer = new MessageConsumer(messageQueueInterface);
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+        Thread pThread = new Thread(messageProducer);
+        Thread pThread2 = new Thread(messageProducer);
+        Thread pThread3 = new Thread(messageProducer);
+        Thread cThread = new Thread(messageConsumer);
+        Thread cThread2 = new Thread(messageConsumer);
+
+        pThread.start();
+        pThread2.start();
+        pThread3.start();
+        cThread.start();
+        cThread2.start();
+
     }
 }
